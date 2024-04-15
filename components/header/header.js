@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image.js';
 import NavLink from './nav-link.js';
 import logo from '@/assets/img/logo.png';
-import { MdSearch } from "react-icons/md";
+import { MdSearch, MdMenu } from "react-icons/md";
 import './header.css';
 
 export default function Header(){
@@ -13,8 +13,8 @@ export default function Header(){
                     <Link href="/" className="navbar-brand d-flex gap-2 align-items-center p-0 me-5">
                         <Image src={logo} className="img-fluid" width={97} height={50} alt="CineMania"  />
                     </Link>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
+                    <button className="navbar-toggler p-0 border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <MdMenu size="24px" />
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
