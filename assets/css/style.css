@@ -1,0 +1,7 @@
+
+:root{
+    --bs-body-bg: #000;
+    --bs-body-color: #ffffff;
+    --bs-primary: #ff5722;
+    --bs-link-hover-color-rgb: var(--bs-primary);
+}
