@@ -1,5 +1,10 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 const tmdbApiKey = '1829846e13ce79eb8bb3f9657075247f';
 
 const fetchMoviesPage = async (page = 1) => {
@@ -29,14 +34,32 @@ const MovieList = () => {
             <div className="container-fluid">
                 <h3>Latest Releases</h3>
                 <div className="row">
-                    {movies.map((movie) => (
-                        <div className="col-lg-3" key={movie.id}>
-                            <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} className="img-fluid" />
-                            <h3>{movie.title}</h3>
-                            <p>{movie.release_date}</p>
-                            <p>{movie.overview}</p>
-                        </div>
-                    ))}
+                    <Swiper
+                        modules={[Navigation, Pagination]}
+                        loop
+                        navigation
+                        pagination={{
+                            type: 'progressbar',
+                        }}
+                        slidesPerView={1}
+                        spaceBetween={16}
+                        centeredSlides={true}
+                        breakpoints={{
+                            480: { slidesPerView: 2 },
+                            767: { slidesPerView: 3 },
+                            991: { slidesPerView: 4 },
+                            1199: { slidesPerView: 5 }
+                        }}
+                    >
+                        {movies.map((movie) => (
+                            <SwiperSlide key={movie.id}>
+                                <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} className="img-fluid" />
+                                <h3>{movie.title}</h3>
+                                <p>{movie.release_date}</p>
+                                {/* <p>{movie.overview}</p> */}
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
                 </div>
                 </div>
         </section>
