@@ -1,0 +1,6 @@
+.movie-content::after{content: '';display: block;position: absolute;top: 0;right: 0;bottom: 0;left: 0;background: linear-gradient(to top, rgba(var(--bs-black-rgb), 0.8), transparent);opacity: 0;transition: all 0.3s ease-in-out;}
+.movie-content:hover::after{opacity: 1;}
+.movie-content:hover img{transform: scale(1.1) rotateZ(2deg);}
+.movie-content .desc{transform: translateY(100%);z-index: 2;}
+.movie-content:hover .desc{transform: none;}
+.movie-content:hover .desc .title a{color: var(--bs-primary) !important;}

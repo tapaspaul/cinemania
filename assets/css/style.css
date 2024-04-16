@@ -3,5 +3,15 @@
     --bs-body-bg: #000;
     --bs-body-color: #ffffff;
     --bs-primary: #ff5722;
+    --bs-primary-rgb: 255, 87, 34;
     --bs-link-hover-color-rgb: var(--bs-primary);
 }
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6{line-height: 1;font-weight: 700;}
+h1, .h1{font-size: 4.375rem;margin-bottom: 1.875rem;}
+h3, .h3{font-size: 1.875rem;margin-bottom: 1.25rem;}
+p:last-of-type{margin-bottom: 0;}
+a{text-decoration: none;transition: all 0.4s ease-in-out;-webkit-transition: all 0.4s ease-in-out;-moz-transition: all 0.4s ease-in-out;-ms-transition: all 0.4s ease-in-out;-o-transition: all 0.4s ease-in-out;}
+.transition-4{transition: all 0.4s ease-in-out;-webkit-transition: all 0.4s ease-in-out;-moz-transition: all 0.4s ease-in-out;-ms-transition: all 0.4s ease-in-out;-o-transition: all 0.4s ease-in-out;}
+.transition-6{transition: all 0.6s ease-in-out;-webkit-transition: all 0.6s ease-in-out;-moz-transition: all 0.6s ease-in-out;-ms-transition: all 0.6s ease-in-out;-o-transition: all 0.6s ease-in-out;}
+.btn{--bs-btn-padding-x: 1.875rem;--bs-btn-padding-y: 1rem;--bs-btn-font-size: 1.125rem;--bs-btn-font-weight: 700;--bs-btn-line-height: 1;--bs-btn-border-width: 0.125rem;--bs-btn-border-radius: 0.125rem;}
+.btn-primary{--bs-btn-bg: var(--bs-primary);--bs-btn-border-color: var(--bs-primary);--bs-btn-hover-color: var(--bs-primary);--bs-btn-hover-bg: transparent;--bs-btn-hover-border-color: var(--bs-primary);--bs-btn-active-bg: var(--bs-primary);--bs-btn-active-border-color: var(--bs-primary);--bs-btn-disabled-bg: var(--bs-primary);--bs-btn-disabled-border-color: var(--bs-primary);}
