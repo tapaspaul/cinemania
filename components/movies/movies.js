@@ -39,7 +39,7 @@ const MovieList = () => {
         fetchMovies();
     }, []);
     return (
-        <section className="py-5">
+        <section className="px-3 py-5">
             <div className="container-fluid">
                 <h3 className="sec-title">Latest Releases</h3>
                 <Swiper
