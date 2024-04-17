@@ -1,26 +1,14 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import classes from './movies.module.css';
-import Link from 'next/link';
-const tmdbApiKey = '1829846e13ce79eb8bb3f9657075247f';
+import Link from "next/link";
 
-const fetchMoviesPage = async (page = 1) => {
-    try {
-        const response = await fetch(
-            `https://api.themoviedb.org/3/movie/upcoming?api_key=${tmdbApiKey}`
-        );
-        const data = await response.json();
-        return data.results;
-    } catch (error) {
-        console.error('Error fetching movies:', error);
-        return null;
-    }
-};
+const API_KEY = '1829846e13ce79eb8bb3f9657075247f';
 
 const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'short', day: '2-digit' };
@@ -28,19 +16,20 @@ const formatDate = (dateString) => {
     return date.toLocaleDateString('en-US', options);
 };
 
-const MovieList = () => {
-    const [movies, setMovies] = useState([]);
-    const fetchMovies = async () => {
-        const moviesData = await fetchMoviesPage(1);
-        setMovies(moviesData || []);
-    };
+const TopRated = () => {
+    const [topRatedMovies, setTopRatedMovies] = useState([]);
     useEffect(() => {
-        fetchMovies();
-    }, []);
-    return (
+        fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`).then((response) => {
+            return response.json();
+        }).then((responseData) => {
+            setTopRatedMovies(responseData.results || []);
+        });
+    }, []);    
+
+    return(
         <section className="py-5">
             <div className="container-fluid px-3">
-                <h3 className="sec-title">Upcoming Movies</h3>
+                <h3 className="sec-title">Top Rated</h3>
                 <Swiper
                     modules={[Navigation, Pagination]}
                     navigation
@@ -58,7 +47,7 @@ const MovieList = () => {
                     }}
                     className="pt-5"
                 >
-                    {movies.map((movie) => (
+                    { topRatedMovies.map((movie) => (
                         <SwiperSlide key={ movie.id }>
                             <div className={ `${ classes['movie-content'] } position-relative overflow-hidden` }>
                                 <img src={`https://image.tmdb.org/t/p/w500/${ movie.poster_path }`} alt={movie.title} className="img-fluid transition-6" />
@@ -70,10 +59,10 @@ const MovieList = () => {
                                 </div>
                             </div>
                         </SwiperSlide>
-                    ))}
+                    )) }
                 </Swiper>
             </div>
         </section>
     );
-};
-export default MovieList;
+}
+export default TopRated;

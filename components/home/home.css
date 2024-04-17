@@ -1,2 +1,2 @@
 .home-banner{border-bottom-left-radius: 30%;border-bottom-right-radius: 30%; clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 50% 100%, 50% 100%, 0% 70%, 0% 0%);border-bottom-right-radius: 70%;border-bottom-left-radius: 70%;}
-.home-banner .container{min-height: 80vh;}
+.home-banner .container{padding: 11.375rem 0 5.125rem 0;min-height: 100vh;}

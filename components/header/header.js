@@ -17,7 +17,7 @@ export default function Header(){
                         <MdMenu size="24px" />
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <ul className="navbar-nav me-auto">
                             <li className="nav-item">
                                 <NavLink href="/">Home</NavLink>
                             </li>
@@ -28,9 +28,16 @@ export default function Header(){
                                 <NavLink href="/musics">Musics</NavLink>
                             </li>
                         </ul>
-                        <button className="btn p-1 border-0" type="submit">
-                        <MdSearch className="d-block" size="24px" />
-                        </button>
+                        <ul className="navbar-nav align-items-center">
+                            <li className="nav-item">
+                                <NavLink href="">Login</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <button className="btn p-1 border-0" type="submit">
+                                    <MdSearch className="d-block" size="24px" />
+                                </button>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </nav>
