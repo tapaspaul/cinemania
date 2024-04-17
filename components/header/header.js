@@ -1,3 +1,5 @@
+'use client';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image.js';
 import NavLink from './nav-link.js';
@@ -6,8 +8,16 @@ import { MdSearch, MdMenu } from "react-icons/md";
 import './header.css';
 
 export default function Header(){
+    const [ headerFixed, setHeaderFixed] = useState(false);
+    useEffect(() => {
+        const headerheight = document.getElementById('header').clientHeight;
+        const handleHeaderFixed = () => setHeaderFixed( window.scrollY > headerheight );
+        window.addEventListener('scroll', handleHeaderFixed);
+        return () => window.removeEventListener('scroll', handleHeaderFixed);
+    }, []);
+    
     return(
-        <header id="header" className="py-3 position-fixed top-0 end-0 start-0">
+        <header id="header" className={`py-3 position-fixed top-0 end-0 start-0${headerFixed ? ' fixed' : ''}`}>
             <nav className="navbar navbar-expand-lg p-0">
                 <div className="container">
                     <Link href="/" className="navbar-brand d-flex gap-2 align-items-center p-0 me-5">
