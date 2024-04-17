@@ -7,8 +7,8 @@ export default function Home() {
   return(
     <section className="home-content">
       <HomeHero />
-      <MovieList></MovieList>
       <TopRated></TopRated>
+      <MovieList></MovieList>
     </section>
   );
 }
