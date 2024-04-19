@@ -11,24 +11,25 @@ import MovieError from "./movie-error";
 
 const API_KEY = process.env.TMDB_API_KEY;
 
-export default function TopRated(){
-    const [ topRatedMovies, setTopRatedMovies ] = useState([]);
+export default function NowPlaying(){
+    const [ nowPlayingMovies, setNowPlayingMovies ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(false);
     const [ error, setError ] = useState();
     useEffect(() => {
-        async function fetchTopRatedMovies(){
+        async function fetchNowPlayingMovies(){
             setIsLoading(true);
             try{
-                const response = await fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`);
+                const response = await fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${ API_KEY }`);
                 const responseData = await response.json();
                 if(!response.ok) throw new Error('Failed to Fetch Movies');
-                setTopRatedMovies(responseData.results || []);
+                setNowPlayingMovies( responseData.results || [] );
             }catch(error){
                 setError({message: error.message || 'Could not find Movies, Please try again later.'});
-            }
+            }            
             setIsLoading(false);
         }
-        fetchTopRatedMovies();
+        fetchNowPlayingMovies();
+        console.log(nowPlayingMovies);
     }, []);
     if(error){
         return <MovieError title="An Error Occured!" message={error.message} />
@@ -36,11 +37,11 @@ export default function TopRated(){
     return(
         <>
             { isLoading && <MoviesSkeleton /> }
-            { topRatedMovies.length === 0 && <p>No movies Found</p> }
-            { topRatedMovies.length > 0 && isLoading === false && (
+            { nowPlayingMovies.length === 0 && <p>No movies Found</p> }
+            { nowPlayingMovies.length > 0 && isLoading === false && (
                 <section className="py-5">
                     <div className="container-fluid px-3">
-                        <h3 className="sec-title">Top Rated Movies</h3>
+                        <h3 className="sec-title">Now Playing Movies</h3>
                         <Swiper
                             modules={[Navigation, Pagination]}
                             navigation
@@ -58,7 +59,7 @@ export default function TopRated(){
                             }}
                             className="pt-5"
                         >
-                            { topRatedMovies.map((movie) => (
+                            { nowPlayingMovies.map((movie) => (
                                 <SwiperSlide key={ movie.id }>
                                     <Movie movie={ movie } />
                                 </SwiperSlide>
@@ -66,7 +67,7 @@ export default function TopRated(){
                         </Swiper>
                     </div>
                 </section>
-            ) }
+            ) }    
         </>
     );
 }
