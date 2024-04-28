@@ -1,3 +1,4 @@
+import { MdVisibility } from 'react-icons/md';
 import classes from './movies.module.css';
 import Link from 'next/link';
 
@@ -16,6 +17,10 @@ export default function Movie({ movie }){
                     <Link href={`/movies/${ movie.id }`} className="text-white">{ movie.title }</Link>
                 </h4>
                 <p className={ classes.date }>{ formatDate( movie.release_date) }</p>
+                <button type="button" className="btn btn-sm btn-outline-primary d-flex align-items-center justify-content-center gap-2 w-100 mt-3">
+                    <MdVisibility className="d-block" />
+                    <span>Add to Watchlist</span>
+                </button>
             </div>
         </div>
     );
