@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MdPostAdd } from 'react-icons/md';
+import { MdOutlinePlaylistAdd, MdOutlinePlaylistAddCheck } from 'react-icons/md';
 import classes from './movies.module.css';
 import Link from 'next/link';
 import { addToWatchlist } from './add-to-watchlist';
@@ -12,14 +12,19 @@ const formatDate = (dateString) => {
 
 export default function Movie({ movie }){
     const [watchList, setWatchList] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [added, setAdded] = useState(false);
     const [ error, setError ] = useState(null);
     const handleWatchlist = async (movieId) => {
+        setLoading(true);
         try{
             const responseData = await addToWatchlist(movieId);
             setWatchList([ ...watchList, responseData ]);
+            setAdded(true);
         }catch (error){
             setError({message: error.message || 'Not able to add movie to the watchlist, Please try again later.'});
         }
+        setLoading(false);
     }
     return(
         <div className={ `${ classes['movie-content'] } position-relative overflow-hidden` }>
@@ -29,9 +34,15 @@ export default function Movie({ movie }){
                     <Link href={`/movies/${ movie.id }`} className="text-white">{ movie.title }</Link>
                 </h4>
                 <p className={ classes.date }>{ formatDate( movie.release_date) }</p>
-                <button onClick={() => handleWatchlist(movie.id)} type="button" className="bg-transparent text-primary p-0 d-flex align-items-center gap-2 w-100 mt-3 border-0">
-                    <MdPostAdd className="d-block" />
-                    <span>Add to Watchlist</span>
+                <button onClick={() => handleWatchlist(movie.id)} type="button" className={`bg-transparent ${ added ? 'text-success' : 'text-primary'} p-0 d-flex align-items-center gap-2 w-100 mt-3 border-0`}>
+                    {loading ? (
+                        <div className="spinner-border spinner-border-sm" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                    ) : (
+                        added ? <MdOutlinePlaylistAddCheck className="d-block" /> : <MdOutlinePlaylistAdd className="d-block" />
+                    )}
+                    <span className="d-block">{ added ? 'Added to Watchlist' : 'Add to Watchlist' }</span>
                 </button>
             </div>
         </div>
